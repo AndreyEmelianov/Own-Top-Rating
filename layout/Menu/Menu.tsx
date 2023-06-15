@@ -49,15 +49,13 @@ export const Menu = (): JSX.Element => {
 				{firstLevelMenu.map((menuItem) => (
 					<div key={menuItem.route}>
 						<a href={`/${menuItem.route}`}>
-							<div>
+							<div
+								className={cn(styles.firstLevel, {
+									[styles.firstLevelActive]: menuItem.id == firstCategory,
+								})}
+							>
 								{menuItem.icon}
-								<span
-									className={cn(styles.firstLevel, {
-										[styles.firstLevelActive]: menuItem.id == firstCategory,
-									})}
-								>
-									{menuItem.name}
-								</span>
+								<span>{menuItem.name}</span>
 							</div>
 						</a>
 						{menuItem.id == firstCategory && buildSecondLevel(menuItem)}
@@ -69,7 +67,7 @@ export const Menu = (): JSX.Element => {
 
 	const buildSecondLevel = (menuItem: IFirstLevelMenuItem) => {
 		return (
-			<div>
+			<div className={styles.secondBlock}>
 				{menu.map((menuCategory) => (
 					<div key={menuCategory._id.secondCategory}>
 						<div className={styles.secondLevel}>{menuCategory._id.secondCategory}</div>
@@ -92,7 +90,7 @@ export const Menu = (): JSX.Element => {
 				key={page._id}
 				href={`/${route}/${page.alias}`}
 				className={cn(styles.thirdLevel, {
-					[styles.thirdLevelActive]: true,
+					[styles.thirdLevelActive]: false,
 				})}
 			>
 				{page.category}
