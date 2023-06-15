@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { format } from 'date-fns';
 
 import { AppContext } from '@/context/app.context';
-import { IFirstLevelMenuItem } from '@/interfaces/menu.interface';
+import { IFirstLevelMenuItem, IPageItem } from '@/interfaces/menu.interface';
 import { TopLevelCategory } from '@/interfaces/toppage.interface';
 
 import CoursesIcon from './icons/courses.svg';
@@ -60,15 +60,45 @@ export const Menu = (): JSX.Element => {
 								</span>
 							</div>
 						</a>
+						{menuItem.id == firstCategory && buildSecondLevel(menuItem)}
 					</div>
 				))}
 			</>
 		);
 	};
 
-	const buildSecondLevel = () => {};
+	const buildSecondLevel = (menuItem: IFirstLevelMenuItem) => {
+		return (
+			<div>
+				{menu.map((menuCategory) => (
+					<div key={menuCategory._id.secondCategory}>
+						<div className={styles.secondLevel}>{menuCategory._id.secondCategory}</div>
+						<div
+							className={cn(styles.secondLevelBlock, {
+								[styles.secondLevelBlockOpened]: menuCategory.isOpened,
+							})}
+						>
+							{buildThirdLevel(menuCategory.pages, menuItem.route)}
+						</div>
+					</div>
+				))}
+			</div>
+		);
+	};
 
-	const buildThirdLevel = () => {};
+	const buildThirdLevel = (pages: IPageItem[], route: string) => {
+		return pages.map((page) => (
+			<a
+				key={page._id}
+				href={`/${route}/${page.alias}`}
+				className={cn(styles.thirdLevel, {
+					[styles.thirdLevelActive]: true,
+				})}
+			>
+				{page.category}
+			</a>
+		));
+	};
 
 	return <div className={styles.menu}>{buildFirstLevel()}</div>;
 };
