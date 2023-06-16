@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import cn from 'classnames';
 import { format } from 'date-fns';
+import Link from 'next/link';
 
 import { AppContext } from '@/context/app.context';
 import { IFirstLevelMenuItem, IPageItem } from '@/interfaces/menu.interface';
@@ -48,7 +49,7 @@ export const Menu = (): JSX.Element => {
 			<>
 				{firstLevelMenu.map((menuItem) => (
 					<div key={menuItem.route}>
-						<a href={`/${menuItem.route}`}>
+						<Link href={`/${menuItem.route}`}>
 							<div
 								className={cn(styles.firstLevel, {
 									[styles.firstLevelActive]: menuItem.id == firstCategory,
@@ -57,7 +58,7 @@ export const Menu = (): JSX.Element => {
 								{menuItem.icon}
 								<span>{menuItem.name}</span>
 							</div>
-						</a>
+						</Link>
 						{menuItem.id == firstCategory && buildSecondLevel(menuItem)}
 					</div>
 				))}
@@ -86,15 +87,15 @@ export const Menu = (): JSX.Element => {
 
 	const buildThirdLevel = (pages: IPageItem[], route: string) => {
 		return pages.map((page) => (
-			<a
-				key={page._id}
+			<Link
 				href={`/${route}/${page.alias}`}
+				key={page._id}
 				className={cn(styles.thirdLevel, {
 					[styles.thirdLevelActive]: false,
 				})}
 			>
 				{page.category}
-			</a>
+			</Link>
 		));
 	};
 
