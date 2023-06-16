@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { GetStaticProps } from 'next';
 import axios from 'axios';
 
-import { Button, Htag, Input, P, Rating, Tag, Textarea } from '@/components';
+import { Button, Htag, Input, P, Rating, Search, Tag, Textarea } from '@/components';
 import { withLayout } from '@/layout/Layout';
 import { IMenuItem } from '@/interfaces/menu.interface';
 
@@ -37,6 +37,7 @@ function Home({ menu }: HomeProps): JSX.Element {
 			</ul>
 			<Input />
 			<Textarea />
+			<Search />
 		</>
 	);
 }
