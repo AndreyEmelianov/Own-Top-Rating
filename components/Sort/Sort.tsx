@@ -27,7 +27,7 @@ export const Sort = ({ sort, setSort, className, ...props }: ISortProps): JSX.El
 				})}
 			>
 				<SortIcon className={styles.sortIcon} />
-				По&nbsp;цене
+				По цене
 			</span>
 		</div>
 	);

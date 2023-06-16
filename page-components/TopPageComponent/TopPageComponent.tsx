@@ -1,3 +1,6 @@
+import { useReducer } from 'react';
+
+import { sortReducer } from './sort.reducer';
 import { Advantages, Card, HhData, Htag, P, Sort, Tag } from '@/components';
 import { ITopPageComponentProps } from './TopPageComponent.props';
 import { TopLevelCategory } from '@/interfaces/toppage.interface';
@@ -11,6 +14,15 @@ export const TopPageComponent = ({
 	firstCategory,
 	...props
 }: ITopPageComponentProps): JSX.Element => {
+	const [{ products: sortedProducts, sort }, dispatchSort] = useReducer(sortReducer, {
+		products,
+		sort: SortEnum.Rating,
+	});
+
+	const setSort = (sort: SortEnum) => {
+		dispatchSort({ type: sort });
+	};
+
 	return (
 		<div className={styles.wrapper}>
 			{/* шапка основного блока */}
@@ -21,13 +33,13 @@ export const TopPageComponent = ({
 						{products.length}
 					</Tag>
 				)}
-				<Sort sort={SortEnum.Rating} setSort={() => {}} />
+				<Sort sort={sort} setSort={setSort} />
 			</div>
 
 			{/* карточки продуктов */}
 			<div>
-				{products &&
-					products.map((product) => <div key={product._id}>{product.title}</div>)}
+				{sortedProducts &&
+					sortedProducts.map((product) => <div key={product._id}>{product.title}</div>)}
 			</div>
 
 			{/* блок с вакансиями hh */}
