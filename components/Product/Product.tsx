@@ -6,12 +6,14 @@ import { Rating } from '../Rating/Rating';
 import { Tag } from '../Tag/Tag';
 
 import styles from './Product.module.css';
+import { Button } from '../Button/Button';
 
 export const Product = ({ product, className, ...props }: IProductProps): JSX.Element => {
 	return (
+		// head продукта
 		<Card className={styles.product}>
 			<div className={styles.logo}>
-				<img src={product.image} alt={product.title} />
+				<img src={process.env.NEXT_PUBLIC_DOMAIN + product.image} alt={product.title} />
 			</div>
 			<div className={styles.title}>{product.title}</div>
 			<div className={styles.price}>{product.price}</div>
@@ -29,6 +31,37 @@ export const Product = ({ product, className, ...props }: IProductProps): JSX.El
 			<div className={styles.priceTitle}>цена</div>
 			<div className={styles.creditTitle}>кредит</div>
 			<div className={styles.rateTitle}>{product.reviewCount} отзывов</div>
+			<div className={styles.hr}>
+				<hr className={styles.hr} />
+			</div>
+
+			{/* описание продукта */}
+			<div className={styles.description}>{product.description}</div>
+
+			{/* блок с фичами */}
+			<div className={styles.feature}>фичи</div>
+
+			{/* блок преимущества и недостатки */}
+			<div className={styles.advBlock}>
+				<div className={styles.advantages}>
+					<div>Преимущества</div>
+					<div>{product.advantages}</div>
+				</div>
+				<div className={styles.disadvantages}>
+					<div>Недостатки</div>
+					<div>{product.disadvantages}</div>
+				</div>
+			</div>
+			<div className={styles.hr}>
+				<hr />
+			</div>
+			{/* блок экшенов */}
+			<div className={styles.actions}>
+				<Button appearance="primary">Узнать подробнее</Button>
+				<Button appearance="ghost" arrow="right">
+					Читать отзывы
+				</Button>
+			</div>
 		</Card>
 	);
 };
