@@ -3,14 +3,56 @@ import cn from 'classnames';
 import { Card } from '../Card/Card';
 import { IHhDataProps } from './HhData.props';
 
+import RateIcon from './rate.svg';
+
 import styles from './HhData.module.css';
 
-export const HhData = ({ count }: IHhDataProps): JSX.Element => {
+export const HhData = ({
+	count,
+	juniorSalary,
+	middleSalary,
+	seniorSalary,
+}: IHhDataProps): JSX.Element => {
 	return (
 		<div className={styles.hh}>
+			{/* карточка всего вакансий */}
 			<Card className={styles.count}>
 				<div className={styles.title}>Всего Вакансий</div>
-				<div className={styles.countCalue}>{count}</div>
+				<div className={styles.countValue}>{count}</div>
+			</Card>
+
+			{/* карточки с информацией о зарплате */}
+			<Card className={styles.salary}>
+				{/* первый блок */}
+				<div>
+					<div className={styles.title}>Начальный</div>
+					<div className={styles.salaryValue}>{juniorSalary}</div>
+					<div className={styles.rate}>
+						<RateIcon className={styles.filled} />
+						<RateIcon />
+						<RateIcon />
+					</div>
+				</div>
+				{/* второй блок */}
+				<div>
+					<div className={styles.title}>Средний</div>
+					<div className={styles.salaryValue}>{middleSalary}</div>
+					<div className={styles.rate}>
+						<RateIcon className={styles.filled} />
+						<RateIcon className={styles.filled} />
+						<RateIcon />
+					</div>
+				</div>
+				{/* третий блок */}
+				<div>
+					<div className={styles.title}>Профессионал</div>
+					<div className={styles.salaryValue}>{seniorSalary}</div>
+					<div className={styles.rate}>
+						<RateIcon className={styles.filled} />
+						<RateIcon className={styles.filled} />
+						<RateIcon className={styles.filled} />
+					</div>
+				</div>
 			</Card>
 		</div>
 	);
