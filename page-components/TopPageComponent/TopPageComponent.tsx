@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 
 import { sortReducer } from './sort.reducer';
-import { Advantages, Card, HhData, Htag, P, Sort, Tag } from '@/components';
+import { Advantages, Card, HhData, Htag, P, Product, Sort, Tag } from '@/components';
 import { ITopPageComponentProps } from './TopPageComponent.props';
 import { TopLevelCategory } from '@/interfaces/toppage.interface';
 import { SortEnum } from '@/components/Sort/Sort.props';
@@ -39,7 +39,9 @@ export const TopPageComponent = ({
 			{/* карточки продуктов */}
 			<div>
 				{sortedProducts &&
-					sortedProducts.map((product) => <div key={product._id}>{product.title}</div>)}
+					sortedProducts.map((product) => (
+						<Product key={product._id} product={product} />
+					))}
 			</div>
 
 			{/* блок с вакансиями hh */}
