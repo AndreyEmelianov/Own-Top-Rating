@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { GetStaticProps } from 'next';
 import axios from 'axios';
 
-import { Button, Htag, P, Rating, Tag } from '@/components';
+import { Button, Htag, Input, P, Rating, Tag } from '@/components';
 import { withLayout } from '@/layout/Layout';
 import { IMenuItem } from '@/interfaces/menu.interface';
 
@@ -35,6 +35,7 @@ function Home({ menu }: HomeProps): JSX.Element {
 					<li key={itemMenu._id.secondCategory}>{itemMenu._id.secondCategory}</li>
 				))}
 			</ul>
+			<Input />
 		</>
 	);
 }
