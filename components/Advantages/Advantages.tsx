@@ -1,5 +1,3 @@
-import cn from 'classnames';
-
 import { IAdvantagesProps } from './Advantages.props';
 
 import CheckIcon from './check.svg';
