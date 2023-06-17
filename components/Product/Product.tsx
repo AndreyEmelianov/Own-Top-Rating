@@ -113,10 +113,10 @@ export const Product = ({ product, className, ...props }: IProductProps): JSX.El
 				})}
 			>
 				{product.reviews.map((review) => (
-					<>
-						<Reviews key={review._id} review={review} />
+					<div key={review._id}>
+						<Reviews review={review} />
 						<Divider />
-					</>
+					</div>
 				))}
 
 				{/* сама форма */}
