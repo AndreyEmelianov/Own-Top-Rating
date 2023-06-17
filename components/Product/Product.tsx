@@ -12,6 +12,7 @@ import { Divider } from '../Divider/Divider';
 import { Reviews } from '../Reviews/Reviews';
 
 import styles from './Product.module.css';
+import { ReviewsForm } from '../ReviewsForm/ReviewsForm';
 
 export const Product = ({ product, className, ...props }: IProductProps): JSX.Element => {
 	const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
@@ -112,8 +113,14 @@ export const Product = ({ product, className, ...props }: IProductProps): JSX.El
 				})}
 			>
 				{product.reviews.map((review) => (
-					<Reviews key={review._id} review={review} />
+					<>
+						<Reviews key={review._id} review={review} />
+						<Divider />
+					</>
 				))}
+
+				{/* сама форма */}
+				<ReviewsForm productId={product._id} />
 			</Card>
 		</>
 	);
