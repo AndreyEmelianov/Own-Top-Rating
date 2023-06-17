@@ -68,7 +68,7 @@ export const getStaticProps: GetStaticProps<ITopPageProps> = async ({
 			API.topPage.byAlias + params.alias
 		);
 
-		const { data: products } = await axios.post<IProductModel[]>(API.topPage.find, {
+		const { data: products } = await axios.post<IProductModel[]>(API.product.find, {
 			category: page.category,
 			limit: 10,
 		});

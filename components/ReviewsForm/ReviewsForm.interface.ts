@@ -4,3 +4,7 @@ export interface IReviewsForm {
 	description: string;
 	rating: number;
 }
+
+export interface IReviewsSentResponse {
+	message: string;
+}
