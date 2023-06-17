@@ -48,7 +48,7 @@ export const Product = ({ product, className, ...props }: IProductProps): JSX.El
 			<div className={styles.priceTitle}>цена</div>
 			<div className={styles.creditTitle}>кредит</div>
 			<div className={styles.rateTitle}>
-				{product.reviewCount}{' '}
+				{product.reviewCount}
 				{declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
 			</div>
 			<Divider className={styles.hr} />
@@ -82,7 +82,7 @@ export const Product = ({ product, className, ...props }: IProductProps): JSX.El
 					</div>
 				)}
 			</div>
-			<Divider className={styles.hr} />
+			<Divider className={cn(styles.hr, styles.hr2)} />
 			{/* блок экшенов */}
 			<div className={styles.actions}>
 				<Button appearance="primary">Узнать подробнее</Button>
