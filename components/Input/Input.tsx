@@ -7,9 +7,20 @@ import styles from './Input.module.css';
 
 export const Input = forwardRef(
 	(
-		{ className, ...props }: IInputProps,
+		{ error, className, ...props }: IInputProps,
 		ref: ForwardedRef<HTMLInputElement>
 	): JSX.Element => {
-		return <input className={cn(className, styles.input)} {...props} ref={ref} />;
+		return (
+			<div className={cn(styles.inputWrapper, className)}>
+				<input
+					className={cn(styles.input, {
+						[styles.error]: error,
+					})}
+					{...props}
+					ref={ref}
+				/>
+				{error && <span className={styles.errorMessage}>{error.message}</span>}
+			</div>
+		);
 	}
 );

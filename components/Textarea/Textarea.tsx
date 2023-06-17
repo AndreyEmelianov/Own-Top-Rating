@@ -7,9 +7,20 @@ import styles from './Textarea.module.css';
 
 export const Textarea = forwardRef(
 	(
-		{ className, ...props }: ITextareaProps,
+		{ error, className, ...props }: ITextareaProps,
 		ref: ForwardedRef<HTMLTextAreaElement>
 	): JSX.Element => {
-		return <textarea className={cn(className, styles.input)} {...props} ref={ref} />;
+		return (
+			<div className={cn(styles.textareaWrapper, className)}>
+				<textarea
+					className={cn(styles.textarea, {
+						[styles.error]: error,
+					})}
+					{...props}
+					ref={ref}
+				/>
+				{error && <span className={styles.errorMessage}>{error.message}</span>}
+			</div>
+		);
 	}
 );

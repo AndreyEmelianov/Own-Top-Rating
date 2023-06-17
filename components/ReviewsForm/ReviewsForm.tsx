@@ -16,7 +16,12 @@ export const ReviewsForm = ({
 	className,
 	...props
 }: IReviewsFormProps): JSX.Element => {
-	const { register, control, handleSubmit } = useForm<IReviewsForm>();
+	const {
+		register,
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<IReviewsForm>();
 
 	const onSubmit = (data: IReviewsForm) => {
 		console.log(data);
@@ -25,11 +30,18 @@ export const ReviewsForm = ({
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className={cn(styles.reviewForm, className)} {...props}>
-				<Input placeholder="Имя" {...register('name')} />
+				<Input
+					placeholder="Имя"
+					{...register('name', { required: { value: true, message: 'Заполните имя' } })}
+					error={errors.name}
+				/>
 				<Input
 					className={styles.title}
 					placeholder="Заголовок отзыва"
-					{...register('title')}
+					{...register('title', {
+						required: { value: true, message: 'Заполните заголовок' },
+					})}
+					error={errors.title}
 				/>
 
 				{/* блок с оценкой */}
@@ -53,7 +65,10 @@ export const ReviewsForm = ({
 				<Textarea
 					className={styles.description}
 					placeholder="Текст отзыва"
-					{...register('description')}
+					{...register('description', {
+						required: { value: true, message: 'Заполните описание' },
+					})}
+					error={errors.description}
 				/>
 
 				{/* блок с кнопкой */}
