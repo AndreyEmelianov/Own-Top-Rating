@@ -51,7 +51,15 @@ export const Product = ({ product, className, ...props }: IProductProps): JSX.El
 			<div className={styles.description}>{product.description}</div>
 
 			{/* блок с фичами */}
-			<div className={styles.feature}>фичи</div>
+			<div className={styles.feature}>
+				{product.characteristics.map((chararcteristic) => (
+					<div className={styles.characteristics} key={chararcteristic.name}>
+						<span className={styles.characteristicsName}>{chararcteristic.name}</span>
+						<span className={styles.characteristicsDots}></span>
+						<span className={styles.characteristicsValue}>{chararcteristic.value}</span>
+					</div>
+				))}
+			</div>
 
 			{/* блок преимущества и недостатки */}
 			<div className={styles.advBlock}>
