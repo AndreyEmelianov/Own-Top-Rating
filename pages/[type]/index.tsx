@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import axios from 'axios';
 import { ParsedUrlQuery } from 'node:querystring';
 
+import { API } from '@/helpers/api';
 import { withLayout } from '@/layout/Layout';
 import { IMenuItem } from '@/interfaces/menu.interface';
 import { firstLevelMenu } from '@/helpers/helpers';
@@ -36,12 +37,9 @@ export const getStaticProps: GetStaticProps<TypeProps> = async ({
 		};
 	}
 
-	const { data: menu } = await axios.post<IMenuItem[]>(
-		process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find',
-		{
-			firstCategory: firstCategoryItem.id,
-		}
-	);
+	const { data: menu } = await axios.post<IMenuItem[]>(API.topPage.find, {
+		firstCategory: firstCategoryItem.id,
+	});
 
 	return {
 		props: {
