@@ -6,6 +6,7 @@ import { Footer } from './Footer/Footer';
 import { Header } from './Header/Header';
 import { Sidebar } from './Sidebar/Sidebar';
 import { ILayoutProps } from './Layout.props';
+import { Up } from '@/components';
 
 import styles from './Layout.module.css';
 
@@ -16,6 +17,7 @@ const Layout = ({ children }: ILayoutProps): JSX.Element => {
 			<Sidebar className={styles.sidebar} />
 			<div className={styles.body}>{children}</div>
 			<Footer className={styles.footer} />
+			<Up />
 		</div>
 	);
 };
