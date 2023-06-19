@@ -137,7 +137,14 @@ export const Product = motion(
 						variants={variants}
 						initial="hidden"
 					>
-						<Card color="blue" className={styles.reviews} ref={reviewRef}>
+						<Card
+							color="blue"
+							className={cn(styles.reviews, {
+								[styles.opened]: isReviewOpened,
+								[styles.closed]: !isReviewOpened,
+							})}
+							ref={reviewRef}
+						>
 							{product.reviews.map((review) => (
 								<div key={review._id}>
 									<Reviews review={review} />

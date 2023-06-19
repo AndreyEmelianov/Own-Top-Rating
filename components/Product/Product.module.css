@@ -140,16 +140,13 @@
 }
 
 /* блок с формой отзывов */
-/* .closed {
-	overflow: hidden;
-	max-height: 0;
-	padding: 0;
+.closed {
+	height: 0;
 }
 
 .opened {
-	max-height: auto;
-	padding: 30px;
-} */
+	height: auto;
+}
 
 .rateTitle a {
 	color: var(--primary);
