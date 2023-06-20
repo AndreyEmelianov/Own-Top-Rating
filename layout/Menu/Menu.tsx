@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, KeyboardEvent } from 'react';
 import cn from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -45,6 +45,13 @@ export const Menu = (): JSX.Element => {
 			);
 	};
 
+	const openSecondLevelMenuKey = (key: KeyboardEvent, secondCategory: string) => {
+		if (key.code == 'Space' || key.code == 'Enter') {
+			key.preventDefault();
+			openSecondLevelMenuHandler(secondCategory);
+		}
+	};
+
 	const buildFirstLevel = () => {
 		return (
 			<>
@@ -82,6 +89,10 @@ export const Menu = (): JSX.Element => {
 					return (
 						<div key={menuCategory._id.secondCategory}>
 							<div
+								tabIndex={0}
+								onKeyDown={(key: KeyboardEvent) =>
+									openSecondLevelMenuKey(key, menuCategory._id.secondCategory)
+								}
 								className={styles.secondLevel}
 								onClick={() =>
 									openSecondLevelMenuHandler(menuCategory._id.secondCategory)
@@ -96,7 +107,11 @@ export const Menu = (): JSX.Element => {
 								animate={menuCategory.isOpened ? 'visible' : 'hidden'}
 								className={cn(styles.secondLevelBlock)}
 							>
-								{buildThirdLevel(menuCategory.pages, menuItem.route)}
+								{buildThirdLevel(
+									menuCategory.pages,
+									menuItem.route,
+									menuCategory.isOpened ?? false
+								)}
 							</motion.div>
 						</div>
 					);
@@ -105,10 +120,11 @@ export const Menu = (): JSX.Element => {
 		);
 	};
 
-	const buildThirdLevel = (pages: IPageItem[], route: string) => {
+	const buildThirdLevel = (pages: IPageItem[], route: string, isOpened: boolean) => {
 		return pages.map((page) => (
 			<motion.div key={page._id} variants={variantsChildren}>
 				<Link
+					tabIndex={isOpened ? 0 : -1}
 					href={`/${route}/${page.alias}`}
 					className={cn(styles.thirdLevel, {
 						[styles.thirdLevelActive]: `/${route}/${page.alias}` == router.asPath,
