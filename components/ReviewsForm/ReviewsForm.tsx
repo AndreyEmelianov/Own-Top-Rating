@@ -27,6 +27,7 @@ export const ReviewsForm = ({
 		handleSubmit,
 		formState: { errors },
 		reset,
+		clearErrors,
 	} = useForm<IReviewsForm>();
 
 	const [isSuccess, setIsSuccess] = useState<boolean>(false);
@@ -60,6 +61,7 @@ export const ReviewsForm = ({
 					{...register('name', { required: { value: true, message: 'Заполните имя' } })}
 					error={errors.name}
 					tabIndex={isOpened ? 0 : -1}
+					aria-invalid={errors.name ? true : false}
 				/>
 				<Input
 					className={styles.title}
@@ -69,6 +71,7 @@ export const ReviewsForm = ({
 					})}
 					error={errors.title}
 					tabIndex={isOpened ? 0 : -1}
+					aria-invalid={errors.title ? true : false}
 				/>
 
 				{/* блок с оценкой */}
@@ -100,11 +103,17 @@ export const ReviewsForm = ({
 					})}
 					error={errors.description}
 					tabIndex={isOpened ? 0 : -1}
+					aria-label="Текст отзыва"
+					aria-invalid={errors.description ? true : false}
 				/>
 
 				{/* блок с кнопкой */}
 				<div className={styles.submit}>
-					<Button appearance="primary" tabIndex={isOpened ? 0 : -1}>
+					<Button
+						appearance="primary"
+						tabIndex={isOpened ? 0 : -1}
+						onClick={() => clearErrors()}
+					>
 						Отправить
 					</Button>
 					<span className={styles.info}>
