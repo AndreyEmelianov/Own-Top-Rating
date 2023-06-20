@@ -15,7 +15,7 @@ import styles from './Rating.module.css';
 
 export const Rating = forwardRef(
 	(
-		{ isEditable = false, rating, setRating, error, ...props }: IRatingProps,
+		{ isEditable = false, rating, setRating, error, tabIndex, ...props }: IRatingProps,
 		ref: ForwardedRef<HTMLDivElement>
 	): JSX.Element => {
 		const [ratingArray, setRatingArray] = useState<JSX.Element[]>(
@@ -26,7 +26,7 @@ export const Rating = forwardRef(
 
 		useEffect(() => {
 			constructRating(rating);
-		}, [rating]);
+		}, [rating, tabIndex]);
 
 		const computeFocus = (rating: number, index: number): number => {
 			if (!isEditable) {
@@ -34,11 +34,11 @@ export const Rating = forwardRef(
 			}
 
 			if (!rating && index == 0) {
-				return 0;
+				return tabIndex ?? 0;
 			}
 
 			if (rating == index + 1) {
-				return 0;
+				return tabIndex ?? 0;
 			}
 
 			return -1;

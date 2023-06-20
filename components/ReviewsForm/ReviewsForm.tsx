@@ -17,6 +17,7 @@ import styles from './ReviewsForm.module.css';
 
 export const ReviewsForm = ({
 	productId,
+	isOpened,
 	className,
 	...props
 }: IReviewsFormProps): JSX.Element => {
@@ -58,6 +59,7 @@ export const ReviewsForm = ({
 					placeholder="Имя"
 					{...register('name', { required: { value: true, message: 'Заполните имя' } })}
 					error={errors.name}
+					tabIndex={isOpened ? 0 : -1}
 				/>
 				<Input
 					className={styles.title}
@@ -66,6 +68,7 @@ export const ReviewsForm = ({
 						required: { value: true, message: 'Заполните заголовок' },
 					})}
 					error={errors.title}
+					tabIndex={isOpened ? 0 : -1}
 				/>
 
 				{/* блок с оценкой */}
@@ -82,6 +85,7 @@ export const ReviewsForm = ({
 								ref={field.ref}
 								setRating={field.onChange}
 								error={errors.rating}
+								tabIndex={isOpened ? 0 : -1}
 							/>
 						)}
 					/>
@@ -95,11 +99,14 @@ export const ReviewsForm = ({
 						required: { value: true, message: 'Заполните описание' },
 					})}
 					error={errors.description}
+					tabIndex={isOpened ? 0 : -1}
 				/>
 
 				{/* блок с кнопкой */}
 				<div className={styles.submit}>
-					<Button appearance="primary">Отправить</Button>
+					<Button appearance="primary" tabIndex={isOpened ? 0 : -1}>
+						Отправить
+					</Button>
 					<span className={styles.info}>
 						* Перед публикацией отзыв пройдет предварительную модерацию и проверку
 					</span>
