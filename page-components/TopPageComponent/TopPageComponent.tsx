@@ -41,10 +41,10 @@ export const TopPageComponent = ({
 			</div>
 
 			{/* карточки продуктов */}
-			<div>
+			<div role="list">
 				{sortedProducts &&
 					sortedProducts.map((product) => (
-						<Product key={product._id} product={product} layout />
+						<Product key={product._id} product={product} layout role="listitem" />
 					))}
 			</div>
 
