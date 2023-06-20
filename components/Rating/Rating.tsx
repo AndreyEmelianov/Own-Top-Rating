@@ -1,4 +1,11 @@
-import { useEffect, useState, KeyboardEvent, forwardRef, ForwardedRef } from 'react';
+import {
+	useEffect,
+	useState,
+	KeyboardEvent,
+	forwardRef,
+	ForwardedRef,
+	useRef,
+} from 'react';
 import cn from 'classnames';
 
 import { IRatingProps } from './Rating.props';
@@ -15,9 +22,27 @@ export const Rating = forwardRef(
 			new Array(5).fill(<></>)
 		);
 
+		const ratingArrayRef = useRef<(HTMLSpanElement | null)[]>([]);
+
 		useEffect(() => {
 			constructRating(rating);
 		}, [rating]);
+
+		const computeFocus = (rating: number, index: number): number => {
+			if (!isEditable) {
+				return -1;
+			}
+
+			if (!rating && index == 0) {
+				return 0;
+			}
+
+			if (rating == index + 1) {
+				return 0;
+			}
+
+			return -1;
+		};
 
 		const constructRating = (currentRating: number) => {
 			const updatedRatingArray = ratingArray.map(
@@ -32,13 +57,11 @@ export const Rating = forwardRef(
 							onMouseEnter={() => changeDisplayHandler(index + 1)}
 							onMouseLeave={() => changeDisplayHandler(rating)}
 							onClick={() => onRatingClick(index + 1)}
+							tabIndex={computeFocus(rating, index)}
+							onKeyDown={handleKey}
+							ref={(r) => ratingArrayRef.current?.push(r)}
 						>
-							<StarIcon
-								tabIndex={isEditable ? 0 : -1}
-								onKeyDown={(event: KeyboardEvent<SVGAElement>) =>
-									isEditable && handleSpace(index + 1, event)
-								}
-							/>
+							<StarIcon />
 						</span>
 					);
 				}
@@ -63,12 +86,27 @@ export const Rating = forwardRef(
 			setRating(index);
 		};
 
-		const handleSpace = (index: number, event: KeyboardEvent<SVGAElement>) => {
-			if (event.code !== 'Space' || !setRating) {
+		const handleKey = (event: KeyboardEvent) => {
+			if (!isEditable || !setRating) {
 				return;
 			}
 
-			setRating(index);
+			if (event.code == 'ArrowRight' || event.code == 'ArrowUp') {
+				if (!rating) {
+					setRating(1);
+				} else {
+					event.preventDefault();
+					setRating(rating < 5 ? rating + 1 : 5);
+				}
+
+				ratingArrayRef.current[rating]?.focus();
+			}
+
+			if (event.code == 'ArrowLeft' || event.code == 'ArrowDown') {
+				event.preventDefault();
+				setRating(rating > 1 ? rating - 1 : 1);
+				ratingArrayRef.current[rating - 2]?.focus();
+			}
 		};
 
 		return (

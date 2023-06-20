@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, KeyboardEvent } from 'react';
 import cn from 'classnames';
 
 import { ISearchProps } from './Search.props';

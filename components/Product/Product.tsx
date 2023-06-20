@@ -36,6 +36,7 @@ export const Product = motion(
 					behavior: 'smooth',
 					block: 'start',
 				});
+				reviewRef.current?.focus();
 			};
 
 			return (
@@ -144,6 +145,7 @@ export const Product = motion(
 								[styles.closed]: !isReviewOpened,
 							})}
 							ref={reviewRef}
+							tabIndex={0}
 						>
 							{product.reviews.map((review) => (
 								<div key={review._id}>
