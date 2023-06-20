@@ -36,7 +36,7 @@ export const Product = motion(
 					behavior: 'smooth',
 					block: 'start',
 				});
-				reviewRef.current?.focus();
+				reviewRef.current?.focus({ preventScroll: true });
 			};
 
 			return (

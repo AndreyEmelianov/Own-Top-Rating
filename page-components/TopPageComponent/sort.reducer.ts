@@ -2,7 +2,7 @@ import { SortEnum } from '@/components/Sort/Sort.props';
 import { IProductModel } from '@/interfaces/product.interface';
 
 export type SortActions =
-	| { type: SortEnum.Price }
+	| { type: SortEnum }
 	| { type: SortEnum.Rating }
 	| { type: 'reset'; initialState: IProductModel[] };
 
