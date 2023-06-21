@@ -42,10 +42,6 @@
 	grid-column: start / middle;
 }
 
-.advBlock {
-	grid-column: middle / end;
-}
-
 .logo img {
 	border-radius: 5px;
 }
@@ -102,6 +98,7 @@
 .advBlock {
 	font-size: 16px;
 	line-height: 22px;
+	grid-column: middle / end;
 }
 
 .advTitle {
@@ -110,7 +107,7 @@
 }
 
 .advantages {
-	border-left: 2px solid #1dc37e;
+	border-left: 2px solid #1DC37E;
 	padding-left: 15px;
 	margin-bottom: 20px;
 }
@@ -157,7 +154,7 @@
 	padding: 30px;
 }
 
-@media screen and (max-width: 1320px) {
+@media screen and (width <= 1320px) {
 	.product {
 		grid-template-columns: 70px 30px auto 40px auto 40px 1fr;
 		grid-template-areas:
@@ -177,53 +174,67 @@
 		grid-area: logo;
 		margin-bottom: 20px;
 	}
+
 	.title {
 		grid-area: title;
 	}
+
 	.tags {
 		grid-area: tags;
 		margin-bottom: 20px;
 	}
+
 	.price {
 		grid-area: price;
 	}
+
 	.credit {
 		grid-area: credit;
 	}
+
 	.rating {
 		grid-area: rating;
 	}
+
 	.priceTitle {
 		grid-area: priceTitle;
 	}
+
 	.creditTitle {
 		grid-area: creditTitle;
 	}
+
 	.rateTitle {
 		grid-area: rateTitle;
 	}
+
 	.hr {
 		grid-area: hr;
 	}
+
 	.description {
 		grid-area: description;
 	}
+
 	.feature {
 		grid-area: feature;
 		margin-bottom: 20px;
 	}
+
 	.advBlock {
 		grid-area: advBlock;
 	}
+
 	.hr2 {
 		grid-area: hr2;
 	}
+
 	.actions {
 		grid-area: actions;
 	}
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (width <= 640px) {
 	.product {
 		grid-template-columns: 70px 30px 1fr;
 		grid-template-areas:
@@ -243,15 +254,17 @@
 	.price {
 		margin-bottom: 10px;
 	}
+
 	.credit {
 		margin-bottom: 10px;
 	}
+
 	.rating {
 		margin-bottom: 10px;
 	}
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (width <= 480px) {
 	.product {
 		grid-template-columns: 1fr;
 		grid-template-areas:

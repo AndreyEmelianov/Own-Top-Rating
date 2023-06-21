@@ -42,7 +42,7 @@
 	height: auto;
 }
 
-@media (max-width: 765px) {
+@media (width <= 765px) {
 	.wrapper {
 		grid-template-columns: minmax(320px, 1fr);
 		grid-template-areas:
@@ -51,6 +51,7 @@
 			'footer';
 		gap: 10px;
 	}
+
 	.sidebar {
 		display: none !important;
 	}

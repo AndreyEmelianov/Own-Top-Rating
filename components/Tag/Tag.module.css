@@ -23,13 +23,13 @@
 
 .red {
 	color: var(--white);
-	background: #de0000;
+	background: #DE0000;
 	font-weight: bold;
 }
 
 .grey {
 	color: var(--white);
-	background: #8a99b7;
+	background: #8A99B7;
 	font-weight: bold;
 }
 
