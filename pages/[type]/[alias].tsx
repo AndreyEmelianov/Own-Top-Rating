@@ -10,8 +10,13 @@ import { ITopPageModel, TopLevelCategory } from '@/interfaces/toppage.interface'
 import { IProductModel } from '@/interfaces/product.interface';
 import { API } from '@/helpers/api';
 import Head from 'next/head';
+import { Error404 } from '../404';
 
 function TopPage({ firstCategory, page, products }: ITopPageProps): JSX.Element {
+	if (!page || !products) {
+		return <Error404 />;
+	}
+
 	return (
 		<>
 			<Head>

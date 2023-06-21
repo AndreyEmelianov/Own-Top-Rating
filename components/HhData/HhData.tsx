@@ -1,5 +1,3 @@
-import cn from 'classnames';
-
 import { priceRu } from '@/helpers/helpers';
 import { Card } from '../Card/Card';
 import { IHhDataProps } from './HhData.props';
