@@ -2,7 +2,7 @@ import { useContext, KeyboardEvent, useState } from 'react';
 import cn from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 import { firstLevelMenu } from '@/helpers/helpers';
 import { AppContext } from '@/context/app.context';
@@ -13,6 +13,7 @@ import styles from './Menu.module.css';
 export const Menu = (): JSX.Element => {
 	const { menu, setMenu, firstCategory } = useContext(AppContext);
 	const [announce, setAnnounce] = useState<'closed' | 'opened' | undefined>();
+	const shouldReduceMotion = useReducedMotion();
 	const router = useRouter();
 
 	const variants = {
@@ -31,7 +32,7 @@ export const Menu = (): JSX.Element => {
 			opacity: 1,
 			height: 40,
 		},
-		hidden: { opacity: 0, height: 0 },
+		hidden: { opacity: shouldReduceMotion ? 1 : 0, height: 0 },
 	};
 
 	const openSecondLevelMenuHandler = (secondCategory: string) => {

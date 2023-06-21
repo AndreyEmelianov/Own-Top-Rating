@@ -9,10 +9,20 @@ import { IMenuItem } from '@/interfaces/menu.interface';
 import { ITopPageModel, TopLevelCategory } from '@/interfaces/toppage.interface';
 import { IProductModel } from '@/interfaces/product.interface';
 import { API } from '@/helpers/api';
+import Head from 'next/head';
 
 function TopPage({ firstCategory, page, products }: ITopPageProps): JSX.Element {
 	return (
-		<TopPageComponent firstCategory={firstCategory} page={page} products={products} />
+		<>
+			<Head>
+				<title>{page.metaTitle}</title>
+				<meta name="description" content={page.metaDescription} />
+				<meta property="og:title" content={page.metaTitle} />
+				<meta property="og:description" content={page.metaDescription} />
+				<meta property="og:type" content="article" />
+			</Head>
+			<TopPageComponent firstCategory={firstCategory} page={page} products={products} />
+		</>
 	);
 }
 
